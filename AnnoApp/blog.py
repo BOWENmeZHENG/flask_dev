@@ -3,6 +3,7 @@ from flask import (
 )
 from werkzeug.exceptions import abort
 from AnnoApp.db import get_db
+from AnnoApp.pyutils import split_para
 
 bp = Blueprint('blog', __name__)
 
@@ -10,7 +11,7 @@ bp = Blueprint('blog', __name__)
 def index():
     db = get_db()
     posts = db.execute(
-        'SELECT p.id, title, body, created'
+        'SELECT p.id, title, body, segment, created'
         ' FROM post p'
         ' ORDER BY created DESC'
     ).fetchall()
@@ -21,20 +22,21 @@ def create():
     if request.method == 'POST':
         title = request.form['title']
         body = request.form['body']
+        segment = ', '.join(["'" + w + "'" for w in split_para(body)])
 
         if not title:
             flash('Title is required.')
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO post (title, body)'
-                ' VALUES (?, ?)',
-                (title, body)
+                'INSERT INTO post (title, body, segment)'
+                ' VALUES (?, ?, ?)',
+                (title, body, segment)
             )
             db.commit()
-            flash(f"Record {title} has been saved!")
+            flash(f"Record '{title}' has been saved!")
             posts = db.execute(
-                'SELECT p.id, title, body, created'
+                'SELECT p.id, title, body, segment, created'
                 ' FROM post p'
                 ' ORDER BY created DESC'
             ).fetchall()
@@ -44,7 +46,7 @@ def create():
 
 def get_post(id, check_author=True):
     post = get_db().execute(
-        'SELECT p.id, title, body, created'
+        'SELECT p.id, title, body, segment, created'
         ' FROM post p'
         ' WHERE p.id = ?',
         (id,)
@@ -62,18 +64,19 @@ def update(id):
     if request.method == 'POST':
         title = request.form['title']
         body = request.form['body']
+        segment = ', '.join(["'" + w + "'" for w in split_para(body)])
         if not title:
             flash('Title is required.')
         else:           
             db.execute(
-                'UPDATE post SET title = ?, body = ?'
+                'UPDATE post SET title = ?, body = ?, segment = ?'
                 ' WHERE id = ?',
-                (title, body, id)
+                (title, body, segment, id)
             )
             db.commit()
-            flash(f"Record {title} has been updated!")
+            flash(f"Record '{title}' has been updated!")
             posts = db.execute(
-                'SELECT p.id, title, body, created'
+                'SELECT p.id, title, body, segment, created'
                 ' FROM post p'
                 ' ORDER BY created DESC'
             ).fetchall()
@@ -86,9 +89,9 @@ def delete(id):
     db = get_db()
     db.execute('DELETE FROM post WHERE id = ?', (id,))
     db.commit()
-    flash("Record has been deleted!")
+    flash(f"Record has been deleted!")
     posts = db.execute(
-        'SELECT p.id, title, body, created'
+        'SELECT p.id, title, body, segment, created'
         ' FROM post p'
         ' ORDER BY created DESC'
     ).fetchall()
