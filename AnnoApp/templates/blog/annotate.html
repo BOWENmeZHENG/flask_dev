@@ -8,14 +8,43 @@
   <form method="post">
     <p> 
       <b>Class:&nbsp;</b> 
-      <font style="background-color:red;color:white;">&nbsp;MATERIAL&nbsp;</font> 
-      <font style="background-color:blue;color:white;">&nbsp;MLIP&nbsp;</font>
-      <font style="background-color:green;color:white;">&nbsp;PROPERTY&nbsp;</font> 
-      <font style="background-color:magenta;color:white;">&nbsp;SIMULATION&nbsp;</font> 
-      <font style="background-color:teal;color:white;">&nbsp;VALUE&nbsp;</font> 
-      <font style="background-color:orange;color:white;">&nbsp;APPLICATION&nbsp;</font>
-      <font style="background-color:lightgray;color:white;">&nbsp;OTHER&nbsp;</font> 
+      <span style="background-color:red;color:white;">&nbsp;MATERIAL&nbsp;</span> 
+      <span style="background-color:blue;color:white;">&nbsp;MLIP&nbsp;</span>
+      <span style="background-color:green;color:white;">&nbsp;PROPERTY&nbsp;</span> 
+      <span style="background-color:magenta;color:white;">&nbsp;SIMULATION&nbsp;</span> 
+      <span style="background-color:teal;color:white;">&nbsp;VALUE&nbsp;</span> 
+      <span style="background-color:orange;color:white;">&nbsp;APPLICATION&nbsp;</span>
+      <span style="background-color:lightgray;color:white;">&nbsp;OTHER&nbsp;</span> 
     </p>
-    <p>{{ post['segment'] }}</p>
+    <style>
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      border-bottom: 1px dotted black;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 120px;
+      background-color: black;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+
+      /* Position the tooltip */
+      position: absolute;
+      z-index: 1;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+    }
+    </style>
+    <div class="tooltip">{{ post['body'] }}
+      <span class="tooltiptext">Tooltip text</span>
+    </div>
+
+    <!-- <p>{{ post['body'] }}</p> -->
   </form>
 {% endblock %}
