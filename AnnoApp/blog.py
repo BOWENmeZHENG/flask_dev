@@ -34,13 +34,21 @@ def create():
                 (title, body, segment)
             )
             db.commit()
-            flash(f"Record '{title}' has been saved!")
-            posts = db.execute(
+            # flash(f"Record '{title}' has been saved!")
+
+            post = get_db().execute(
                 'SELECT p.id, title, body, segment, created'
                 ' FROM post p'
-                ' ORDER BY created DESC'
-            ).fetchall()
-            return render_template('blog/index.html', posts=posts)
+                ' WHERE title = ?',
+                (title,)
+            ).fetchone()
+            # posts = db.execute(
+            #     'SELECT p.id, title, body, segment, created'
+            #     ' FROM post p'
+            #     ' ORDER BY created DESC'
+            # ).fetchall()
+            # return render_template('blog/index.html', posts=posts)
+            return render_template('blog/annotate.html', post=post)
 
     return render_template('blog/create.html')
 

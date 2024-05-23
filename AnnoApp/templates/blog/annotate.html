@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Annotate{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <p> 
+      <b>Class:&nbsp;</b> 
+      <font style="background-color:red;color:white;">&nbsp;MATERIAL&nbsp;</font> 
+      <font style="background-color:blue;color:white;">&nbsp;MLIP&nbsp;</font>
+      <font style="background-color:green;color:white;">&nbsp;PROPERTY&nbsp;</font> 
+      <font style="background-color:magenta;color:white;">&nbsp;SIMULATION&nbsp;</font> 
+      <font style="background-color:teal;color:white;">&nbsp;VALUE&nbsp;</font> 
+      <font style="background-color:orange;color:white;">&nbsp;APPLICATION&nbsp;</font>
+      <font style="background-color:lightgray;color:white;">&nbsp;OTHER&nbsp;</font> 
+    </p>
+    <p>{{ post['segment'] }}</p>
+  </form>
+{% endblock %}
