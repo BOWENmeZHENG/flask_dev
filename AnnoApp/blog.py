@@ -3,7 +3,7 @@ from flask import (
 )
 from werkzeug.exceptions import abort
 from AnnoApp.db import get_db
-from AnnoApp.pyutils import split_para
+from AnnoApp.pyutils import split_para, write_anno
 
 bp = Blueprint('blog', __name__)
 
@@ -11,7 +11,7 @@ bp = Blueprint('blog', __name__)
 def index():
     db = get_db()
     posts = db.execute(
-        'SELECT p.id, title, body, segment, created'
+        'SELECT p.id, title, body, created'
         ' FROM post p'
         ' ORDER BY created DESC'
     ).fetchall()
@@ -22,39 +22,34 @@ def create():
     if request.method == 'POST':
         title = request.form['title']
         body = request.form['body']
-        segment = ', '.join(["'" + w + "'" for w in split_para(body)])
 
         if not title:
             flash('Title is required.')
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO post (title, body, segment)'
-                ' VALUES (?, ?, ?)',
-                (title, body, segment)
+                'INSERT INTO post (title, body)'
+                ' VALUES (?, ?)',
+                (title, body)
             )
             db.commit()
-            # flash(f"Record '{title}' has been saved!")
 
             post = get_db().execute(
-                'SELECT p.id, title, body, segment, created'
+                'SELECT p.id, title, body, created'
                 ' FROM post p'
                 ' WHERE title = ?',
                 (title,)
             ).fetchone()
-            # posts = db.execute(
-            #     'SELECT p.id, title, body, segment, created'
-            #     ' FROM post p'
-            #     ' ORDER BY created DESC'
-            # ).fetchall()
-            # return render_template('blog/index.html', posts=posts)
-            return render_template('blog/annotate.html', post=post)
+            text = post['body']
+            word_list = split_para(text)
+            write_anno('annotate_try', word_list)
+            return render_template('blog/annotate_try.html', post=word_list)
 
     return render_template('blog/create.html')
 
 def get_post(id, check_author=True):
     post = get_db().execute(
-        'SELECT p.id, title, body, segment, created'
+        'SELECT p.id, title, body, created'
         ' FROM post p'
         ' WHERE p.id = ?',
         (id,)
@@ -72,19 +67,18 @@ def update(id):
     if request.method == 'POST':
         title = request.form['title']
         body = request.form['body']
-        segment = ', '.join(["'" + w + "'" for w in split_para(body)])
         if not title:
             flash('Title is required.')
         else:           
             db.execute(
-                'UPDATE post SET title = ?, body = ?, segment = ?'
+                'UPDATE post SET title = ?, body = ?'
                 ' WHERE id = ?',
-                (title, body, segment, id)
+                (title, body, id)
             )
             db.commit()
             flash(f"Record '{title}' has been updated!")
             posts = db.execute(
-                'SELECT p.id, title, body, segment, created'
+                'SELECT p.id, title, body, created'
                 ' FROM post p'
                 ' ORDER BY created DESC'
             ).fetchall()
@@ -99,7 +93,7 @@ def delete(id):
     db.commit()
     flash(f"Record has been deleted!")
     posts = db.execute(
-        'SELECT p.id, title, body, segment, created'
+        'SELECT p.id, title, body, created'
         ' FROM post p'
         ' ORDER BY created DESC'
     ).fetchall()
