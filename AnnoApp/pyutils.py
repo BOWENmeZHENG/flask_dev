@@ -64,22 +64,18 @@ def write_anno(name, text):
         f.write("    }\n")
         
         f.write("    </style>\n")
+        # <a href="destination.html">
+        #     <button>Click Me!</button>
+        # </a>
         f.write("    <div> \n")
         f.write("      <b>Class:&nbsp;</b> \n")
-        f.write(f"      <button type='button' class='button button_MATERIAL'>MATERIAL</button> \n")
+        f.write("      <a href='https://08lkabe82u4c-496ff2e9c6d22116-5000-colab.googleusercontent.com/'> <button type='button' class='button button_MATERIAL'>MATERIAL</button> </a>\n")
         f.write("      <button type='button' class='button button_MLIP'>MLIP</button> \n")
         f.write("      <button type='button' class='button button_PROPERTY'>PROPERTY</button> \n")
         f.write("      <button type='button' class='button button_SIMULATION'>SIMULATION</button> \n")
         f.write("      <button type='button' class='button button_VALUE'>VALUE</button> \n")
         f.write("      <button type='button' class='button button_APPLICATION'>APPLICATION</button> \n")
         f.write("      <button type='button' class='button button_OTHER'>OTHER</button> \n")
-        # f.write("      <span style='background-color:red;color:white;'>&nbsp;MATERIAL&nbsp;</span> \n")
-        # f.write("      <span style='background-color:blue;color:white;'>&nbsp;MLIP&nbsp;</span> \n")
-        # f.write("      <span style='background-color:green;color:white;'>&nbsp;PROPERTY&nbsp;</span> \n")
-        # f.write("      <span style='background-color:magenta;color:white;'>&nbsp;SIMULATION&nbsp;</span> \n")
-        # f.write("      <span style='background-color:teal;color:white;'>&nbsp;VALUE&nbsp;</span> \n")
-        # f.write("      <span style='background-color:orange;color:white;'>&nbsp;APPLICATION&nbsp;</span> \n")
-        # f.write("      <span style='background-color:lightgray;color:white;'>&nbsp;OTHER&nbsp;</span> \n")
         f.write("    </div>\n")
 
         f.write("    <div>\n")
