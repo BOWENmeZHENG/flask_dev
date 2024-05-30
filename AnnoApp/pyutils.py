@@ -18,7 +18,7 @@ def write_anno(name, text):
         f.write("      border-color: gray;\n")
         f.write("    }\n")
         f.write("    .button:hover {\n")
-        f.write("      background-color: gray; \n")
+        f.write("      font-weight : bold; \n")
         f.write("    }\n")
         
         f.write("    .button_MATERIAL {\n")
@@ -64,16 +64,15 @@ def write_anno(name, text):
         f.write("    }\n")
         
         f.write("    </style>\n")
-        
         f.write("    <div> \n")
         f.write("      <b>Class:&nbsp;</b> \n")
-        f.write("      <button class='button button_MATERIAL'>MATERIAL</button> \n")
-        f.write("      <button class='button button_MLIP'>MLIP</button> \n")
-        f.write("      <button class='button button_PROPERTY'>PROPERTY</button> \n")
-        f.write("      <button class='button button_SIMULATION'>SIMULATION</button> \n")
-        f.write("      <button class='button button_VALUE'>VALUE</button> \n")
-        f.write("      <button class='button button_APPLICATION'>APPLICATION</button> \n")
-        f.write("      <button class='button button_OTHER'>OTHER</button> \n")
+        f.write(f"      <button type='button' class='button button_MATERIAL'>MATERIAL</button> \n")
+        f.write("      <button type='button' class='button button_MLIP'>MLIP</button> \n")
+        f.write("      <button type='button' class='button button_PROPERTY'>PROPERTY</button> \n")
+        f.write("      <button type='button' class='button button_SIMULATION'>SIMULATION</button> \n")
+        f.write("      <button type='button' class='button button_VALUE'>VALUE</button> \n")
+        f.write("      <button type='button' class='button button_APPLICATION'>APPLICATION</button> \n")
+        f.write("      <button type='button' class='button button_OTHER'>OTHER</button> \n")
         # f.write("      <span style='background-color:red;color:white;'>&nbsp;MATERIAL&nbsp;</span> \n")
         # f.write("      <span style='background-color:blue;color:white;'>&nbsp;MLIP&nbsp;</span> \n")
         # f.write("      <span style='background-color:green;color:white;'>&nbsp;PROPERTY&nbsp;</span> \n")
@@ -85,7 +84,7 @@ def write_anno(name, text):
 
         f.write("    <div>\n")
         for word in text:
-            f.write(f"      <button class='button button_words'>{word}</button> \n")
+            f.write(f"      <button  type='button' class='button button_words'>{word}</button> \n")
         f.write("    </div>\n")
         
         f.write("  </form>\n")
