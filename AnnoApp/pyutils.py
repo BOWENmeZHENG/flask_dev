@@ -1,5 +1,4 @@
 import re
-vm = 'https://08lkabe82u4c-496ff2e9c6d22116-5000-colab.googleusercontent.com/'
 
 def split_para(para):
     return re.findall(r"[\w']+|[-.,!?;/\(\)\[\]]", para)
@@ -17,48 +16,37 @@ def write_anno(name, text):
         f.write("      padding: 4px 8px;\n")
         f.write("      margin: 4px 2px;\n")
         f.write("      border-color: gray;\n")
+        f.write("      color: white; \n")
         f.write("    }\n")
         f.write("    .button:hover {\n")
         f.write("      font-weight : bold; \n")
         f.write("    }\n")
-        
+        # Class buttons
         f.write("    .button_MATERIAL {\n")
         f.write("      background-color: red; \n")
-        f.write("      color: white; \n")
         f.write("    }\n")
-        
         f.write("    .button_MLIP {\n")
         f.write("      background-color: blue; \n")
-        f.write("      color: white; \n")
         f.write("    }\n")
-        
         f.write("    .button_PROPERTY {\n")
         f.write("      background-color: green; \n")
-        f.write("      color: white; \n")
         f.write("    }\n")
-        
         f.write("    .button_SIMULATION {\n")
         f.write("      background-color: magenta; \n")
-        f.write("      color: white; \n")
         f.write("    }\n")
-        
         f.write("    .button_VALUE {\n")
         f.write("      background-color: teal; \n")
-        f.write("      color: white; \n")
         f.write("    }\n")
-        
         f.write("    .button_APPLICATION {\n")
         f.write("      background-color: orange; \n")
-        f.write("      color: white; \n")
         f.write("    }\n")
-        
         f.write("    .button_OTHER {\n")
         f.write("      background-color: lightgray; \n")
-        f.write("      color: white; \n")
         f.write("    }\n")
-        
+        # Word buttons
         f.write("    .button_words {\n")
         f.write("      background-color: white; \n")
+        f.write("      color: black; \n")
         f.write("    }\n")
         f.write("    .button_words:hover {\n")
         f.write("      background-color: yellow; \n")
@@ -71,10 +59,6 @@ def write_anno(name, text):
         f.write("    </style>\n")
         f.write("    <div> \n")
         f.write("      <b>Class:&nbsp;</b> \n")
-        # f.write(f"      <a href='{vm}'> <button type='button' class='button button_MATERIAL'>MATERIAL</button> </a>\n")
-        # Click and enter a new state where I can mark words
-        # Some link it should go
-        # A base annotate html?
         f.write("      <button type='button' class='button button_MATERIAL' onclick='Select_Func(\"MATERIAL\")'>MATERIAL</button>\n")
         f.write("      <button type='button' class='button button_MLIP' onclick='Select_Func(\"MLIP\")'>MLIP</button> \n")
         f.write("      <button type='button' class='button button_PROPERTY' onclick='Select_Func(\"PROPERTY\")'>PROPERTY</button> \n")
@@ -115,53 +99,31 @@ def write_anno(name, text):
         f.write("      if  (Class === 'OTHER') {\n")
         f.write("        F = Func_OTHER;\n")
         f.write("      }\n")
-        # f.write("      return F;\n")
         f.write("    }\n")
-        f.write("    </script>\n")
-        
-        f.write("    <script>\n")
         f.write("    function Func_MATERIAL(id) {\n")
         f.write("      document.getElementById(id).style.backgroundColor = 'red';\n")
         f.write("      document.getElementById(id).style.color = 'white';\n")
         f.write("    }\n")
-        f.write("    </script>\n")
-        
-        f.write("    <script>\n")
         f.write("    function Func_MLIP(id) {\n")
         f.write("      document.getElementById(id).style.backgroundColor = 'blue';\n")
         f.write("      document.getElementById(id).style.color = 'white';\n")
         f.write("    }\n")
-        f.write("    </script>\n")
-        
-        f.write("    <script>\n")
         f.write("    function Func_PROPERTY(id) {\n")
         f.write("      document.getElementById(id).style.backgroundColor = 'green';\n")
         f.write("      document.getElementById(id).style.color = 'white';\n")
         f.write("    }\n")
-        f.write("    </script>\n")
-        
-        f.write("    <script>\n")
         f.write("    function Func_SIMULATION(id) {\n")
         f.write("      document.getElementById(id).style.backgroundColor = 'magenta';\n")
         f.write("      document.getElementById(id).style.color = 'white';\n")
         f.write("    }\n")
-        f.write("    </script>\n")
-        
-        f.write("    <script>\n")
         f.write("    function Func_VALUE(id) {\n")
         f.write("      document.getElementById(id).style.backgroundColor = 'teal';\n")
         f.write("      document.getElementById(id).style.color = 'white';\n")
         f.write("    }\n")
-        f.write("    </script>\n")
-        
-        f.write("    <script>\n")
         f.write("    function Func_APPLICATION(id) {\n")
         f.write("      document.getElementById(id).style.backgroundColor = 'orange';\n")
         f.write("      document.getElementById(id).style.color = 'white';\n")
         f.write("    }\n")
-        f.write("    </script>\n")
-        
-        f.write("    <script>\n")
         f.write("    function Func_OTHER(id) {\n")
         f.write("      document.getElementById(id).style.backgroundColor = 'lightgray';\n")
         f.write("      document.getElementById(id).style.color = 'white';\n")
