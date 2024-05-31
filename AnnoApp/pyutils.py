@@ -1,4 +1,5 @@
 import re
+vm = 'https://08lkabe82u4c-496ff2e9c6d22116-5000-colab.googleusercontent.com/'
 
 def split_para(para):
     return re.findall(r"[\w']+|[-.,!?;/\(\)\[\]]", para)
@@ -63,25 +64,109 @@ def write_anno(name, text):
         f.write("      background-color: yellow; \n")
         f.write("    }\n")
         
+        f.write("    <script>\n")
+        f.write("    F = null;\n")
+        f.write("    </script>\n")
+        
         f.write("    </style>\n")
-        # <a href="destination.html">
-        #     <button>Click Me!</button>
-        # </a>
         f.write("    <div> \n")
         f.write("      <b>Class:&nbsp;</b> \n")
-        f.write("      <a href='https://08lkabe82u4c-496ff2e9c6d22116-5000-colab.googleusercontent.com/'> <button type='button' class='button button_MATERIAL'>MATERIAL</button> </a>\n")
-        f.write("      <button type='button' class='button button_MLIP'>MLIP</button> \n")
-        f.write("      <button type='button' class='button button_PROPERTY'>PROPERTY</button> \n")
-        f.write("      <button type='button' class='button button_SIMULATION'>SIMULATION</button> \n")
-        f.write("      <button type='button' class='button button_VALUE'>VALUE</button> \n")
-        f.write("      <button type='button' class='button button_APPLICATION'>APPLICATION</button> \n")
-        f.write("      <button type='button' class='button button_OTHER'>OTHER</button> \n")
+        # f.write(f"      <a href='{vm}'> <button type='button' class='button button_MATERIAL'>MATERIAL</button> </a>\n")
+        # Click and enter a new state where I can mark words
+        # Some link it should go
+        # A base annotate html?
+        f.write("      <button type='button' class='button button_MATERIAL' onclick='Select_Func(\"MATERIAL\")'>MATERIAL</button>\n")
+        f.write("      <button type='button' class='button button_MLIP' onclick='Select_Func(\"MLIP\")'>MLIP</button> \n")
+        f.write("      <button type='button' class='button button_PROPERTY' onclick='Select_Func(\"PROPERTY\")'>PROPERTY</button> \n")
+        f.write("      <button type='button' class='button button_SIMULATION' onclick='Select_Func(\"SIMULATION\")'>SIMULATION</button> \n")
+        f.write("      <button type='button' class='button button_VALUE' onclick='Select_Func(\"VALUE\")'>VALUE</button> \n")
+        f.write("      <button type='button' class='button button_APPLICATION' onclick='Select_Func(\"APPLICATION\")'>APPLICATION</button> \n")
+        f.write("      <button type='button' class='button button_OTHER' onclick='Select_Func(\"OTHER\")'>OTHER</button> \n")
         f.write("    </div>\n")
 
         f.write("    <div>\n")
-        for word in text:
-            f.write(f"      <button  type='button' class='button button_words'>{word}</button> \n")
+        for i, word in enumerate(text):
+            f.write(f"      <button id='{i}' type='button' class='button button_words' onclick='F(\"{i}\")'>{word}</button> \n")
         f.write("    </div>\n")
+        
+        f.write("    <script>\n")
+        f.write("    function Select_Func(Class) {\n")
+        f.write("      if  (Class === 'MATERIAL') {\n")
+        f.write("        F = Func_MATERIAL;\n")
+        f.write("      }\n")
+        f.write("      if  (Class === 'MLIP') {\n")
+        f.write("        F = Func_MLIP;\n")
+        f.write("      }\n")
+        f.write("      if  (Class === 'PROPERTY') {\n")
+        f.write("        F = Func_PROPERTY;\n")
+        f.write("      }\n")
+        f.write("      if  (Class === 'SIMULATION') {\n")
+        f.write("        F = Func_SIMULATION;\n")
+        f.write("      }\n")
+        f.write("      if  (Class === 'PROPERTY') {\n")
+        f.write("        F = Func_PROPERTY;\n")
+        f.write("      }\n")
+        f.write("      if  (Class === 'VALUE') {\n")
+        f.write("        F = Func_VALUE;\n")
+        f.write("      }\n")
+        f.write("      if  (Class === 'APPLICATION') {\n")
+        f.write("        F = Func_APPLICATION;\n")
+        f.write("      }\n")
+        f.write("      if  (Class === 'OTHER') {\n")
+        f.write("        F = Func_OTHER;\n")
+        f.write("      }\n")
+        # f.write("      return F;\n")
+        f.write("    }\n")
+        f.write("    </script>\n")
+        
+        f.write("    <script>\n")
+        f.write("    function Func_MATERIAL(id) {\n")
+        f.write("      document.getElementById(id).style.backgroundColor = 'red';\n")
+        f.write("      document.getElementById(id).style.color = 'white';\n")
+        f.write("    }\n")
+        f.write("    </script>\n")
+        
+        f.write("    <script>\n")
+        f.write("    function Func_MLIP(id) {\n")
+        f.write("      document.getElementById(id).style.backgroundColor = 'blue';\n")
+        f.write("      document.getElementById(id).style.color = 'white';\n")
+        f.write("    }\n")
+        f.write("    </script>\n")
+        
+        f.write("    <script>\n")
+        f.write("    function Func_PROPERTY(id) {\n")
+        f.write("      document.getElementById(id).style.backgroundColor = 'green';\n")
+        f.write("      document.getElementById(id).style.color = 'white';\n")
+        f.write("    }\n")
+        f.write("    </script>\n")
+        
+        f.write("    <script>\n")
+        f.write("    function Func_SIMULATION(id) {\n")
+        f.write("      document.getElementById(id).style.backgroundColor = 'magenta';\n")
+        f.write("      document.getElementById(id).style.color = 'white';\n")
+        f.write("    }\n")
+        f.write("    </script>\n")
+        
+        f.write("    <script>\n")
+        f.write("    function Func_VALUE(id) {\n")
+        f.write("      document.getElementById(id).style.backgroundColor = 'teal';\n")
+        f.write("      document.getElementById(id).style.color = 'white';\n")
+        f.write("    }\n")
+        f.write("    </script>\n")
+        
+        f.write("    <script>\n")
+        f.write("    function Func_APPLICATION(id) {\n")
+        f.write("      document.getElementById(id).style.backgroundColor = 'orange';\n")
+        f.write("      document.getElementById(id).style.color = 'white';\n")
+        f.write("    }\n")
+        f.write("    </script>\n")
+        
+        f.write("    <script>\n")
+        f.write("    function Func_OTHER(id) {\n")
+        f.write("      document.getElementById(id).style.backgroundColor = 'lightgray';\n")
+        f.write("      document.getElementById(id).style.color = 'white';\n")
+        f.write("    }\n")
+        f.write("    </script>\n")
         
         f.write("  </form>\n")
         f.write("{% endblock %}\n")

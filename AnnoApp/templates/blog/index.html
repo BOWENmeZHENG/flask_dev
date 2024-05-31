@@ -13,6 +13,7 @@
           <h1>{{ post['title'] }}</h1>
           <div class="about">on {{ post['created'].strftime('%Y-%m-%d') }}</div>
         </div>
+        <a class="action" href="{{ url_for('blog.annotate', id=post['id']) }}">Annotate</a>
         <a class="action" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
       </header>
       <p class="body">{{ post['body'] }}</p>
