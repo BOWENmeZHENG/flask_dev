@@ -114,5 +114,6 @@ def write_anno(name, text):
         # f.write("    }\n")
         f.write("    </script>\n")
         
+        f.write("  <a class='action' href='{{ url_for(\"blog.index\") }}'>Finish</a>\n")
         f.write("  </form>\n")
         f.write("{% endblock %}\n")
