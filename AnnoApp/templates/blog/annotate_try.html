@@ -304,6 +304,7 @@
     <button onclick='readValue()'>Get the item value</button>
     <p id='demo'></p>
     <script>
+    const annotation = {};
     function Select_Func(Class) {
       if  (Class === 'MATERIAL') F = Func_MATERIAL
       if  (Class === 'MLIP') F = Func_MLIP
@@ -316,30 +317,34 @@
     function Func_MATERIAL(id) {
       document.getElementById(id).style.backgroundColor = 'red';
       document.getElementById(id).style.color = 'white';
+      annotation[id] = 'MATERIAL';
     }
     function Func_MLIP(id) {
       document.getElementById(id).style.backgroundColor = 'blue';
       document.getElementById(id).style.color = 'white';
+      annotation[id] = 'MLIP';
     }
     function Func_PROPERTY(id) {
       document.getElementById(id).style.backgroundColor = 'green';
       document.getElementById(id).style.color = 'white';
+      annotation[id] = 'PROPERTY';
     }
     function Func_SIMULATION(id) {
       document.getElementById(id).style.backgroundColor = 'magenta';
       document.getElementById(id).style.color = 'white';
+      annotation[id] = 'SIMULATION';
     }
     function Func_VALUE(id) {
       document.getElementById(id).style.backgroundColor = 'teal';
       document.getElementById(id).style.color = 'white';
+      annotation[id] = 'VALUE';
     }
     function Func_APPLICATION(id) {
       document.getElementById(id).style.backgroundColor = 'orange';
       document.getElementById(id).style.color = 'white';
+      annotation[id] = 'APPLICATION';
     }
     function readValue() {
-      const annotation = {};
-      annotation['id'] = 'MATERIAL';
       sessionStorage.setItem('test1', JSON.stringify(annotation));
       var x = sessionStorage.getItem('test1');
       document.getElementById('demo').innerHTML = x;

@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block content %}
+
   {% for post in posts %}
     <article class="post">
       <header>
@@ -17,8 +18,18 @@
         <a class="action" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
       </header>
       <p class="body">{{ post['body'] }}</p>
-      </header>
-      <p class="body">{{ post['segment'] }}</p>
+      
+      <body onload="myFunction()">
+        <p id="output"></p>
+      </body>
+      
+      <script>
+      function myFunction() {
+        var x = sessionStorage.getItem('test1');
+        document.getElementById("output").innerHTML = x;
+      }
+         
+      </script>
     </article>
     {% if not loop.last %}
       <hr>
