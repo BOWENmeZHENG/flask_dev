@@ -19,13 +19,13 @@
       </header>
       <p class="body">{{ post['body'] }}</p>
       
-      <body onload="myFunction()">
+      <body onload="showAnnotation()">
         <p id="output"></p>
       </body>
       
       <script>
-      function myFunction() {
-        var x = sessionStorage.getItem('test1');
+      function showAnnotation() {
+        var x = sessionStorage.getItem('Annotation');
         document.getElementById("output").innerHTML = x;
       }
          

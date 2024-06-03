@@ -64,7 +64,7 @@ def write_anno(name, text):
         for i, word in enumerate(text):
             f.write(f"      <button id='{i}' type='button' class='button button_words' onclick='F(\"{i}\")'>{word}</button> \n")
         f.write("    </div>\n")
-        f.write("    <button onclick='readValue()'>Get the item value</button>\n")
+        f.write("    <button type='button' style='width:200px;margin-top:20px;' onclick='saveAnnotation()'>Save annotation</button>\n")
         f.write("    <p id='demo'></p>\n")
         f.write("    <script>\n")
         f.write("    const annotation = {};\n")
@@ -107,18 +107,9 @@ def write_anno(name, text):
         f.write("      document.getElementById(id).style.color = 'white';\n")
         f.write("      annotation[id] = 'APPLICATION';\n")
         f.write("    }\n")
-        f.write("    function readValue() {\n")
-        f.write("      sessionStorage.setItem('test1', JSON.stringify(annotation));\n")
-        f.write("      var x = sessionStorage.getItem('test1');\n")
-        f.write("      document.getElementById('demo').innerHTML = x;\n")
+        f.write("    function saveAnnotation() {\n")
+        f.write("      sessionStorage.setItem('Annotation', JSON.stringify(annotation));\n")
         f.write("    }\n")
-        # db = get_db()
-        # db.execute(
-        #     'INSERT INTO post (title, body)'
-        #     ' VALUES (?, ?)',
-        #     (title, body)
-        # )
-        # db.commit()
         
         f.write("    </script>\n")
         
