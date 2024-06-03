@@ -40,9 +40,6 @@ def write_anno(name, text):
         f.write("    .button_APPLICATION {\n")
         f.write("      background-color: orange; \n")
         f.write("    }\n")
-        # f.write("    .button_OTHER {\n")
-        # f.write("      background-color: lightgray; \n")
-        # f.write("    }\n")
         # Word buttons
         f.write("    .button_words {\n")
         f.write("      background-color: white; \n")
@@ -51,10 +48,6 @@ def write_anno(name, text):
         f.write("    .button_words:hover {\n")
         f.write("      background-color: yellow; \n")
         f.write("    }\n")
-        
-        f.write("    <script>\n")
-        f.write("    F = null;\n")
-        f.write("    </script>\n")
         
         f.write("    </style>\n")
         f.write("    <div> \n")
@@ -65,14 +58,14 @@ def write_anno(name, text):
         f.write("      <button type='button' class='button button_SIMULATION' onclick='Select_Func(\"SIMULATION\")'>SIMULATION</button> \n")
         f.write("      <button type='button' class='button button_VALUE' onclick='Select_Func(\"VALUE\")'>VALUE</button> \n")
         f.write("      <button type='button' class='button button_APPLICATION' onclick='Select_Func(\"APPLICATION\")'>APPLICATION</button> \n")
-        # f.write("      <button type='button' class='button button_OTHER' onclick='Select_Func(\"OTHER\")'>OTHER</button> \n")
         f.write("    </div>\n")
 
         f.write("    <div>\n")
         for i, word in enumerate(text):
             f.write(f"      <button id='{i}' type='button' class='button button_words' onclick='F(\"{i}\")'>{word}</button> \n")
         f.write("    </div>\n")
-        
+        f.write("    <button onclick='readValue()'>Get the item value</button>\n")
+        f.write("    <p id='demo'></p>\n")
         f.write("    <script>\n")
         f.write("    function Select_Func(Class) {\n")
         f.write("      if  (Class === 'MATERIAL') F = Func_MATERIAL\n")
@@ -82,11 +75,11 @@ def write_anno(name, text):
         f.write("      if  (Class === 'PROPERTY') F = Func_PROPERTY\n")
         f.write("      if  (Class === 'VALUE') F = Func_VALUE\n")
         f.write("      if  (Class === 'APPLICATION') F = Func_APPLICATION\n")
-        # f.write("      if  (Class === 'OTHER') F = Func_OTHER\n")
         f.write("    }\n")
         f.write("    function Func_MATERIAL(id) {\n")
         f.write("      document.getElementById(id).style.backgroundColor = 'red';\n")
         f.write("      document.getElementById(id).style.color = 'white';\n")
+        
         f.write("    }\n")
         f.write("    function Func_MLIP(id) {\n")
         f.write("      document.getElementById(id).style.backgroundColor = 'blue';\n")
@@ -108,10 +101,14 @@ def write_anno(name, text):
         f.write("      document.getElementById(id).style.backgroundColor = 'orange';\n")
         f.write("      document.getElementById(id).style.color = 'white';\n")
         f.write("    }\n")
-        # f.write("    function Func_OTHER(id) {\n")
-        # f.write("      document.getElementById(id).style.backgroundColor = 'lightgray';\n")
-        # f.write("      document.getElementById(id).style.color = 'white';\n")
-        # f.write("    }\n")
+        f.write("    function readValue() {\n")
+        f.write("      const annotation = {};\n")
+        f.write("      annotation['id'] = 'MATERIAL';\n")
+        f.write("      sessionStorage.setItem('test1', JSON.stringify(annotation));\n")
+        f.write("      var x = sessionStorage.getItem('test1');\n")
+        f.write("      document.getElementById('demo').innerHTML = x;\n")
+        f.write("    }\n")
+        
         f.write("    </script>\n")
         
         f.write("  <a class='action' href='{{ url_for(\"blog.index\") }}'>Finish</a>\n")
