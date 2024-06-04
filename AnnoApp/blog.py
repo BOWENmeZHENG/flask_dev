@@ -44,10 +44,12 @@ def create():
 @bp.route('/<int:id>/annotate', methods=('GET', 'POST'))
 def annotate(id):
     post = get_post(id)
-    text = post['body']
-    word_list = split_para(text)
-    write_anno('annotate_try', word_list)
-    return render_template('blog/annotate_try.html', post=word_list)
+    if request.method == 'GET':
+        text = post['body']
+        word_list = split_para(text)
+        write_anno('annotate_try', word_list)
+        return render_template('blog/annotate_try.html', post=word_list)
+    # return render_template('blog/index.html', posts=posts)
 
 def get_post(id, check_author=True):
     post = get_db().execute(

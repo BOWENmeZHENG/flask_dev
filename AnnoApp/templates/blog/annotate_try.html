@@ -301,8 +301,9 @@
       <button id='248' type='button' class='button button_words' onclick='F("248")'>MOFs</button> 
       <button id='249' type='button' class='button button_words' onclick='F("249")'>.</button> 
     </div>
-    <button type='button' style='width:200px;margin-top:20px;' onclick='saveAnnotation()'>Save annotation</button>
-    <p id='demo'></p>
+    <button type='button' style='width:200px;margin-top:20px;' onclick='showAnnotation()'>Show annotation</button>
+    <p id='try'></p> 
+    <a class='action' href='{{ url_for("blog.index") }}'>Finish</a>
     <script>
     const annotation = {};
     function Select_Func(Class) {
@@ -344,10 +345,9 @@
       document.getElementById(id).style.color = 'white';
       annotation[id] = 'APPLICATION';
     }
-    function saveAnnotation() {
-      sessionStorage.setItem('Annotation', JSON.stringify(annotation));
+    function showAnnotation() {
+      document.getElementById('try').innerHTML = JSON.stringify(annotation);
     }
     </script>
-  <a class='action' href='{{ url_for("blog.index") }}'>Finish</a>
   </form>
 {% endblock %}

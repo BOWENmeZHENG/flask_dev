@@ -64,8 +64,12 @@ def write_anno(name, text):
         for i, word in enumerate(text):
             f.write(f"      <button id='{i}' type='button' class='button button_words' onclick='F(\"{i}\")'>{word}</button> \n")
         f.write("    </div>\n")
-        f.write("    <button type='button' style='width:200px;margin-top:20px;' onclick='saveAnnotation()'>Save annotation</button>\n")
-        f.write("    <p id='demo'></p>\n")
+        f.write("    <button type='button' style='width:200px;margin-top:20px;' onclick='showAnnotation()'>Show annotation</button>\n")
+        f.write("    <p id='try'></p> \n")
+        f.write("    <a class='action' href='{{ url_for(\"blog.index\") }}'>Finish</a>\n")
+        # ----------------------------
+        # Script from here on
+        # ----------------------------
         f.write("    <script>\n")
         f.write("    const annotation = {};\n")
         f.write("    function Select_Func(Class) {\n")
@@ -107,12 +111,14 @@ def write_anno(name, text):
         f.write("      document.getElementById(id).style.color = 'white';\n")
         f.write("      annotation[id] = 'APPLICATION';\n")
         f.write("    }\n")
-        f.write("    function saveAnnotation() {\n")
-        f.write("      sessionStorage.setItem('Annotation', JSON.stringify(annotation));\n")
+        # f.write("    function saveAnnotation() {\n")
+        # f.write("      sessionStorage.setItem('Annotation', JSON.stringify(annotation));\n")
+        # f.write("    }\n")
+        f.write("    function showAnnotation() {\n")
+        f.write("      document.getElementById('try').innerHTML = JSON.stringify(annotation);\n")
         f.write("    }\n")
-        
+        # f.write("    document.getElementById('try').innerHTML = JSON.stringify(annotation);\n")
         f.write("    </script>\n")
         
-        f.write("  <a class='action' href='{{ url_for(\"blog.index\") }}'>Finish</a>\n")
         f.write("  </form>\n")
         f.write("{% endblock %}\n")
