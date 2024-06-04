@@ -65,7 +65,7 @@ def write_anno(name, text):
             f.write(f"      <button id='{i}' type='button' class='button button_words' onclick='F(\"{i}\")'>{word}</button> \n")
         f.write("    </div>\n")
         f.write("    <button type='button' style='width:200px;margin-top:20px;' onclick='saveAnnotation()'>Save annotation</button>\n")
-        f.write("    <p id='show'></p> \n")
+        f.write("    <p style='word-wrap: break-word;' id='show'></p> \n")
         f.write("    <a class='action' href='{{ url_for(\"blog.index\") }}'>Finish</a>\n")
         
         # ----------------------------
