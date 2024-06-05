@@ -11,7 +11,7 @@ bp = Blueprint('blog', __name__)
 def index():
     db = get_db()
     posts = db.execute(
-        'SELECT p.id, title, body, created'
+        'SELECT p.id, title, body, annotation, created'
         ' FROM post p'
         ' ORDER BY created DESC'
     ).fetchall()
@@ -22,18 +22,19 @@ def create():
     if request.method == 'POST':
         title = request.form['title']
         body = request.form['body']
+        annotation = request.form['annotation']
         if not title:
             flash('Title is required.')
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO post (title, body)'
-                ' VALUES (?, ?)',
-                (title, body)
+                'INSERT INTO post (title, body, annotation)'
+                ' VALUES (?, ?, ?)',
+                (title, body, annotation)
             )
             db.commit()
             posts = db.execute(
-                'SELECT p.id, title, body, created'
+                'SELECT p.id, title, body, annotation, created'
                 ' FROM post p'
                 ' ORDER BY created DESC'
             ).fetchall()
@@ -53,7 +54,7 @@ def annotate(id):
 
 def get_post(id, check_author=True):
     post = get_db().execute(
-        'SELECT p.id, title, body, created'
+        'SELECT p.id, title, body, annotation, created'
         ' FROM post p'
         ' WHERE p.id = ?',
         (id,)
@@ -71,18 +72,19 @@ def update(id):
     if request.method == 'POST':
         title = request.form['title']
         body = request.form['body']
+        annotation = request.form['annotation']
         if not title:
             flash('Title is required.')
         else:           
             db.execute(
-                'UPDATE post SET title = ?, body = ?'
+                'UPDATE post SET title = ?, body = ?, annotation = ?'
                 ' WHERE id = ?',
-                (title, body, id)
+                (title, body, annotation, id)
             )
             db.commit()
             flash(f"Record '{title}' has been updated!")
             posts = db.execute(
-                'SELECT p.id, title, body, created'
+                'SELECT p.id, title, body, annotation, created'
                 ' FROM post p'
                 ' ORDER BY created DESC'
             ).fetchall()
@@ -97,7 +99,7 @@ def delete(id):
     db.commit()
     flash(f"Record has been deleted!")
     posts = db.execute(
-        'SELECT p.id, title, body, created'
+        'SELECT p.id, title, body, annotation, created'
         ' FROM post p'
         ' ORDER BY created DESC'
     ).fetchall()
