@@ -64,9 +64,10 @@ def write_anno(name, text):
         for i, word in enumerate(text):
             f.write(f"      <button id='{i}' type='button' class='button button_words' onclick='F(\"{i}\")'>{word}</button> \n")
         f.write("    </div>\n")
-        f.write("    <button type='button' style='width:200px;margin-top:20px;' onclick='saveAnnotation()'>Save annotation</button>\n")
-        f.write("    <p style='word-wrap: break-word;' id='show'></p> \n")
-        f.write("    <a class='action' href='{{ url_for(\"blog.index\") }}'>Finish</a>\n")
+        f.write("    <button type='button' style='width:200px;margin-top:20px;' onclick='saveAnnotation()'>Generate annotation</button>\n")
+        f.write("    <input style='width:700px;margin-top:10px;' type='text' id='show' value=''/>\n")
+        f.write("    <button type='button' onclick='copyAnnotation()' style='width:200px;'>Copy annotation</button>\n")
+        f.write("    <a style='margin-top:20px;'class='action' href='{{ url_for(\"blog.index\") }}'>Finish</a>\n")
         
         # ----------------------------
         # Script from here on
@@ -114,7 +115,12 @@ def write_anno(name, text):
         f.write("    }\n")
         f.write("    function saveAnnotation() {\n")
         f.write("      var anno = JSON.stringify(annotation);\n")
-        f.write("      document.getElementById('show').innerHTML = anno;\n")
+        f.write("      document.getElementById('show').value = anno;\n")
+        f.write("    }\n")
+        f.write("    function copyAnnotation() {\n")
+        f.write("      var copyText = document.getElementById('show');\n")
+        f.write("      copyText.select();\n")
+        f.write("      navigator.clipboard.writeText(copyText.value);\n")
         f.write("    }\n")
         f.write("    </script>\n")
         
