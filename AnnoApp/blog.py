@@ -23,22 +23,19 @@ def create():
         title = request.form['title']
         body = request.form['body']
         annotation = request.form['annotation']
-        if not title:
-            flash('Title is required.')
-        else:
-            db = get_db()
-            db.execute(
-                'INSERT INTO post (title, body, annotation)'
-                ' VALUES (?, ?, ?)',
-                (title, body, annotation)
-            )
-            db.commit()
-            posts = db.execute(
-                'SELECT p.id, title, body, annotation, created'
-                ' FROM post p'
-                ' ORDER BY created DESC'
-            ).fetchall()
-            return render_template('blog/index.html', posts=posts)
+        db = get_db()
+        db.execute(
+            'INSERT INTO post (title, body, annotation)'
+            ' VALUES (?, ?, ?)',
+            (title, body, annotation)
+        )
+        db.commit()
+        posts = db.execute(
+            'SELECT p.id, title, body, annotation, created'
+            ' FROM post p'
+            ' ORDER BY created DESC'
+        ).fetchall()
+        return render_template('blog/index.html', posts=posts)
 
     return render_template('blog/create.html')
 
@@ -50,7 +47,6 @@ def annotate(id):
         word_list = split_para(text)
         write_anno('annotate_try', word_list)
         return render_template('blog/annotate_try.html', post=word_list)
-    # return render_template('blog/index.html', posts=posts)
 
 def get_post(id, check_author=True):
     post = get_db().execute(
@@ -59,9 +55,6 @@ def get_post(id, check_author=True):
         ' WHERE p.id = ?',
         (id,)
     ).fetchone()
-
-    if post is None:
-        abort(404, f"Post id {id} doesn't exist.")
 
     return post
 
@@ -73,22 +66,18 @@ def update(id):
         title = request.form['title']
         body = request.form['body']
         annotation = request.form['annotation']
-        if not title:
-            flash('Title is required.')
-        else:           
-            db.execute(
-                'UPDATE post SET title = ?, body = ?, annotation = ?'
-                ' WHERE id = ?',
-                (title, body, annotation, id)
-            )
-            db.commit()
-            flash(f"Record '{title}' has been updated!")
-            posts = db.execute(
-                'SELECT p.id, title, body, annotation, created'
-                ' FROM post p'
-                ' ORDER BY created DESC'
-            ).fetchall()
-            return render_template('blog/index.html', posts=posts)
+        db.execute(
+            'UPDATE post SET title = ?, body = ?, annotation = ?'
+            ' WHERE id = ?',
+            (title, body, annotation, id)
+        )
+        db.commit()
+        posts = db.execute(
+            'SELECT p.id, title, body, annotation, created'
+            ' FROM post p'
+            ' ORDER BY created DESC'
+        ).fetchall()
+        return render_template('blog/index.html', posts=posts)
 
     return render_template('blog/update.html', post=post)
 
