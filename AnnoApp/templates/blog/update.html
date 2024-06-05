@@ -13,7 +13,7 @@
     <label for="body">Body</label>
     <textarea name="body" id="body"  required>{{ request.form['body'] or post['body'] }}</textarea>
     <label for="annotation">Annotation</label>
-    <textarea name="annotation" id="annotation">{{ request.form['annotation'] }}</textarea>
+    <textarea name="annotation" id="annotation">{{ request.form['annotation'] or post['annotation'] }}</textarea>
     <input type="submit" value="Save">
   </form>
   <hr>
