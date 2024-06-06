@@ -46,7 +46,8 @@ def annotate(id):
         text = post['body']
         word_list = split_para(text)
         write_anno('annotate_try', word_list)
-        return render_template('blog/annotate_try.html', post=word_list)
+        
+        return render_template('blog/annotate_try.html', post=word_list, ID=id)
     
 
 def get_post(id, check_author=True):

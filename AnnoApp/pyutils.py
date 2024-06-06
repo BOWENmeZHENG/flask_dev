@@ -67,7 +67,7 @@ def write_anno(name, text):
         f.write("    <button type='button' style='width:200px;margin-top:20px;' onclick='saveAnnotation()'>Generate annotation</button>\n")
         f.write("    <input style='width:700px;margin-top:10px;' type='text' id='show' value=''/>\n")
         f.write("    <button type='button' onclick='copyAnnotation()' style='width:200px;'>Copy annotation</button>\n")
-        f.write("    <a style='margin-top:20px;'class='action' href='{{ url_for(\"blog.index\") }}'>Finish</a>\n")
+        f.write("    <a style='margin-top:20px;'class='action' href='{{ url_for(\"blog.update\", id=ID) }}'>Finish</a>\n")
         
         # ----------------------------
         # Script from here on
