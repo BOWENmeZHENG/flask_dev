@@ -1,7 +1,7 @@
 import re
 
 def split_para(para):
-    return re.findall(r"[\w]+|[-.,\'!=?%–−;/\(\)\[\]]", para)
+    return re.findall(r"[\w]+|[-.,\'!=±?%–−;/\(\)\[\]]", para)
 
 def write_anno(name, text):
     with open(f'AnnoApp/templates/blog/{name}.html', 'w') as f:
